@@ -44,4 +44,12 @@ public class User implements Serializable {
         return this.hashedPass;
 
     }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public boolean idAdmin() {
+        return this.admin;
+    }
 }
