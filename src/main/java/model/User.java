@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.util.Scanner;
 import java.math.BigInteger;
 
-public class User implements Serializable{
+public class User implements Serializable {
     private String name;
     private int userID;
     private String hashedPass;
