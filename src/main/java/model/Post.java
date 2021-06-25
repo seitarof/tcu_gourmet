@@ -33,7 +33,7 @@ public class Post implements Serializable{
     }
 
     public String getShopName() {
-        return shopName;
+        return this.shopName;
     }
 
     public void setReview(String review) {
@@ -73,7 +73,7 @@ public class Post implements Serializable{
     }
 
     public int getCommentCount() {
-        return commentCount;
+        return this.commentCount;
     }
 
 }

@@ -19,7 +19,7 @@ public class Comment {
     }
 
     public int getPostID() {
-        return postID;
+        return this.postID;
     }
 
     public void setUserID(int userID) {
@@ -27,7 +27,7 @@ public class Comment {
     }
 
     public int getUserID() {
-        return userID;
+        return this.userID;
     }
 
     public void setComment(String comment) {
@@ -35,7 +35,7 @@ public class Comment {
     }
 
     public String getComment() {
-        return comment;
+        return this.comment;
     }
 
 }

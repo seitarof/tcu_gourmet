@@ -19,7 +19,7 @@ public class Good {
     }
 
     public int getPostID() {
-        return postID;
+        return this.postID;
     }
 
     public void setUserID(int userID) {
@@ -27,7 +27,7 @@ public class Good {
     }
 
     public int getUserID() {
-        return userID;
+        return this.userID;
     }
 
     public void setGoodCount(int goodCount) {
@@ -39,7 +39,7 @@ public class Good {
     }
 
     public int getGoodCount() {
-        return goodCount;
+        return this.goodCount;
     }
 
 }
