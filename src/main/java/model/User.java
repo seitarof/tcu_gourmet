@@ -40,4 +40,8 @@ public class User implements Serializable {
         }
     }
 
+    public String getHashedPass() {
+        return this.hashedPass;
+
+    }
 }
