@@ -1,6 +1,8 @@
 package model;
 
-public class Good {
+import java.io.Serializable;
+
+public class Good implements Serializable {
     private int goodID;
     private int postID;
     private int userID;

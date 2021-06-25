@@ -1,6 +1,8 @@
 package model;
 
-public class Comment {
+import java.io.Serializable;
+
+public class Comment implements Serializable {
     private int commentID;
     private int postID;
     private int userID;

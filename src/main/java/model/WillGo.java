@@ -1,6 +1,8 @@
 package model;
 
-public class WillGo {
+import java.io.Serializable;
+
+public class WillGo implements Serializable {
     private int willGoID;
     private int postID;
     private int userID;
