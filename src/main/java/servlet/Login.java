@@ -61,7 +61,7 @@ public class Login extends HttpServlet {
 	String userEmail;
 	String userHashedPass;
 	boolean userAdmin;
-	UserDAO uDAO = new UserDAO;
+	UserDAO uDAO = new UserDAO();
 	User user = uDAO.readUser(inputemail);
 	userName = user.getName();
 	userID = user.getUserID();

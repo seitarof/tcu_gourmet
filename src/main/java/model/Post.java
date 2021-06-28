@@ -11,6 +11,19 @@ public class Post implements Serializable {
     private int goodCount;
     private int commentCount;
 
+    public Post(int postID, int userID, String shopName, String review, String photoPath) {
+        this.postID = postID;
+        this.userID = userID;
+        this.shopName = shopName;
+        this.review = review;
+        this.photoPath = photoPath;
+
+    }
+    public Post(){
+        
+    }
+
+
     public void setPostID(int postID) {
         this.postID = postID;
     }
@@ -43,12 +56,12 @@ public class Post implements Serializable {
         return this.review;
     }
 
-    public void setPhotoPath(String photoPath){
-    this.photoPath = photoPath;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
-    public String getPhotoPath(){
-    return this.photoPath;
+    public String getPhotoPath() {
+        return this.photoPath;
     }
 
     public void setGoodCount(int goodCount) {
