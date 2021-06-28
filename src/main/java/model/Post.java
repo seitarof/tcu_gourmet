@@ -7,8 +7,7 @@ public class Post implements Serializable {
     private int userID;
     private String shopName;
     private String review;
-    // フィールドにvarは許されないらしい
-    // private var photo;
+    private String photoPath;
     private int goodCount;
     private int commentCount;
 
@@ -44,13 +43,13 @@ public class Post implements Serializable {
         return this.review;
     }
 
-    // public void setPhoto(var photo){
-    // this.photo = photo;
-    // }
+    public void setPhotoPath(String photoPath){
+    this.photoPath = photoPath;
+    }
 
-    // public var getPhoto(){
-    // return this.photo;
-    // }
+    public String getPhotoPath(){
+    return this.photoPath;
+    }
 
     public void setGoodCount(int goodCount) {
         this.goodCount = goodCount;

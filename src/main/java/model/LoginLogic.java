@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.math.BigInteger;
 
 public class LoginLogic {
-    public boolean execute(User user, String inputPass) {
+    public boolean execute(String email, String inputemail, String hashedPass, String inputPass) {
         String hashedInputPass = "";
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -14,7 +14,7 @@ public class LoginLogic {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (user.getHashedPass().equals(hashedInputPass)) {
+        if (email.equals(inputemail) && hashedPass.equals(hashedInputPass)) {
             return true;
         } else {
             return false;
