@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
 	String inputemail = request.getParameter("email");
 	String inputpass = request.getParameter("pass");
 	// メールアドレスとパスワードが正規か判断
-	boolean emailIsRegular = inputpass.matches("^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\\.)+[a-zA-Z]{2,}$");
+	boolean emailIsRegular = inputemail.matches("^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\\.)+[a-zA-Z]{2,}$");
 	boolean passIsRegular = false;
 	if(inputpass.length() >= 8) {
 		passIsRegular = true;
