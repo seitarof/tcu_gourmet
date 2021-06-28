@@ -18,7 +18,7 @@ public class PostDAO implements DAO {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
-			String sql = "SELECT POST_ID, USER_ID, SHOP_NAME, REVIEW, PHOTO";
+			String sql = "SELECT POST_ID, USER_ID, SHOP_NAME, REVIEW, PHOTO FROM POST";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//SELECTを実行し、結果表を取得
@@ -48,7 +48,7 @@ public class PostDAO implements DAO {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
-			String sql = "SELECT POST_ID, USER_ID, SHOP_NAME, REVIEW, PHOTO FROM USER WHERE POST_ID = ?";
+			String sql = "SELECT POST_ID, USER_ID, SHOP_NAME, REVIEW, PHOTO FROM POST WHERE POST_ID = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, postID);
 			
@@ -58,10 +58,10 @@ public class PostDAO implements DAO {
 			// 結果表に格納されたレコードの内容をUserインスタンスに設定し、ArrayListインスタンスに追加
 			while (rs.next()) {
 				int userID = rs.getInt("USER_ID");
-				String name = rs.getString("NAME");
-				String pass = rs.getString("PASS");
-				String email = rs.getString("EMAIL");
-				Boolean admin = rs.getBoolean("ADIMN");
+				String shopName = rs.getString("SHOP_NAME");
+				String review = rs.getString("REVIEW");
+				String photoPath = rs.getString("PHOTO");
+				post = new Post(postID, userID, shopName, review, photoPath);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,7 +72,7 @@ public class PostDAO implements DAO {
 	
 	
 	public Boolean createPost(Post post) {
-		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {			
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			// INSERT文を準備
 			String sql = "INSERT INTO POST(USER_ID, SHOP_NAME, REVIEW, PHOTO) VALUES(?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -120,5 +120,31 @@ public class PostDAO implements DAO {
 		}
 		return true;
 	}
-
+	
+	public Post readLastPost() {
+		Post post = null;
+		// DBへ接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			
+			// SELECT文を準備
+			String sql = "SELECT * FROM POST ORDER BY POST_ID DESC LIMIT 1;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			//SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+			
+			// 結果表に格納されたレコードの内容をPostインスタンスに設定し、ArrayListインスタンスに追加
+			rs.next();
+			int postID = rs.getInt("POST_ID");
+			int userID = rs.getInt("USER_ID");
+			String shopName = rs.getString("SHOP_NAME");
+			String review = rs.getString("REVIEW");
+			String photoPath = rs.getString("PHOTO");
+			post = new Post(postID, userID, shopName, review, photoPath);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return post;
+	}
 }

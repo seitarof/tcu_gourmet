@@ -18,7 +18,7 @@ public class GoodDAO implements DAO {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
-			String sql = "SELECT GOOD_ID, POST_ID, USER_ID, GOOD_COUNT";
+			String sql = "SELECT GOOD_ID, POST_ID, USER_ID, GOOD_COUNT FROM GOOD GROUP BY POST_ID";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//SELECTを実行し、結果表を取得
@@ -44,13 +44,12 @@ public class GoodDAO implements DAO {
 	public Boolean createGood(Good good) {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {			
 			// INSERT文を準備
-			String sql = "INSERT INTO POST(POST_ID, USER_ID, GOOD_COUNT) VALUES(?, ?, ?)";
+			String sql = "INSERT INTO GOOD(POST_ID, USER_ID, GOOD_COUNT) VALUES(?, ?, 0)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// INSERT文中の「？」に使用する値を設定しSQLを完成
 			pStmt.setInt(1, good.getPostID());
 			pStmt.setInt(2, good.getUserID());
-			pStmt.setInt(3, good.getGoodCount());
 			
 			//INSERTを実行
 			int result = pStmt.executeUpdate();
@@ -89,5 +88,27 @@ public class GoodDAO implements DAO {
 		}
 		return true;
 	}
-
+	
+	public int goodCount(int postID) {
+		int count = 0;
+		// DBへ接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			
+			// SELECT文を準備
+			String sql = "SELECT SUM(GOOD_COUNT) FROM GOOD WHERE POST_ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, postID);
+			
+			//SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+			
+			// 結果表に格納されたレコードの内容をUserインスタンスに設定し、ArrayListインスタンスに追加
+			rs.next();
+			count = rs.getInt("SUM(GOOD_COUNT)");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return count;
+	}
 }

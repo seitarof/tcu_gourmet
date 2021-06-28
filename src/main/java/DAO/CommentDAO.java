@@ -18,7 +18,7 @@ public class CommentDAO implements DAO {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
-			String sql = "SELECT GOOD_ID, POST_ID, USER_ID, GOOD_COUNT";
+			String sql = "SELECT GOOD_ID, POST_ID, USER_ID, COMMENT FROM COMMENT";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//SELECTを実行し、結果表を取得
@@ -43,7 +43,7 @@ public class CommentDAO implements DAO {
 	public Boolean createComment(Comment comment) {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {			
 			// INSERT文を準備
-			String sql = "INSERT INTO POST(POST_ID, USER_ID, COMMENT) VALUES(?, ?, ?)";
+			String sql = "INSERT INTO COMMENT(POST_ID, USER_ID, COMMENT) VALUES(?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// INSERT文中の「？」に使用する値を設定しSQLを完成

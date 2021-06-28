@@ -18,7 +18,7 @@ public class UserDAO implements DAO {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
-			String sql = "SELECT USER_ID, NAME, PASS, EMAIL, ADMIN";
+			String sql = "SELECT USER_ID, NAME, PASS, EMAIL, ADMIN FROM USER";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//SELECTを実行し、結果表を取得
@@ -52,7 +52,7 @@ public class UserDAO implements DAO {
 			pStmt.setString(1, user.getName());
 			pStmt.setString(2, user.getHashedPass());
 			pStmt.setString(3, user.getEmail());
-			
+						
 			//INSERTを実行
 			int result = pStmt.executeUpdate();
 			if(result != 1) {
@@ -118,5 +118,32 @@ public class UserDAO implements DAO {
 			return false;
 		}
 		return true;
+	}
+	
+	public User readLastUser() {
+		User user = null;
+		// DBへ接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			
+			// SELECT文を準備
+			String sql = "SELECT * FROM USER ORDER BY USER_ID DESC LIMIT 1;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			//SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+			
+			// 結果表に格納されたレコードの内容をPostインスタンスに設定し、ArrayListインスタンスに追加
+			rs.next();
+			int userID = rs.getInt("USER_ID");
+			String name = rs.getString("NAME");
+			String pass = rs.getString("PASS");
+			String email = rs.getString("EMAIL");
+			Boolean admin = rs.getBoolean("ADMIN");
+			user = new User(name, userID, email, pass, admin);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return user;
 	}
 }
