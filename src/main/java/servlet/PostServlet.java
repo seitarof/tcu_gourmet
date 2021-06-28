@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.*;
+import DAO.*;
 
 /**
  * Servlet implementation class PostServlet
@@ -40,11 +42,18 @@ public class PostServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 値を取得
 		request.setCharacterEncoding("UTF-8");
+		String userIDString = request.getParameter("userID");
 		String shopName = request.getParameter("shopName");
 		String photo = request.getParameter("picture");
 		String review = request.getParameter("postText");
-		
-	
+		int userID = Integer.parseInt(userIDString);
+		Post post = new Post();
+		post.setUserID(userID);
+		post.setShopName(shopName);
+		post.setPhotoPath(photo);
+		post.setReview(review);
+		PostDAO pDAO = new PostDAO();
+		pDAO.createPost(post);
 	}
 
 }
