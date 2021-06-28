@@ -16,7 +16,6 @@ public class UserDAO implements DAO {
 		
 		// DBへ接続
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-			
 			// SELECT文を準備
 			String sql = "SELECT USER_ID, NAME, PASS, EMAIL, ADMIN";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -31,7 +30,7 @@ public class UserDAO implements DAO {
 				String pass = rs.getString("PASS");
 				String email = rs.getString("EMAIL");
 				Boolean admin = rs.getBoolean("ADIMN");
-				User user = new User(userID, name, pass, email, admin);
+				User user = new User(name, userID, email, pass, admin);
 				userList.add(user);
 			}
 		} catch (SQLException e) {
@@ -84,8 +83,9 @@ public class UserDAO implements DAO {
 				String name = rs.getString("NAME");
 				String pass = rs.getString("PASS");
 				String email = rs.getString("EMAIL");
-				Boolean admin = rs.getBoolean("ADIMN");
-				user = new User(userID, name, pass, email, admin);
+				Boolean admin = rs.getBoolean("ADMIN");
+				user = new User(name, userID, email, pass, admin);
+				System.out.println(name);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

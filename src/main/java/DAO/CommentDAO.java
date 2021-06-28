@@ -18,7 +18,7 @@ public class CommentDAO implements DAO {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
-			String sql = "SELECT GOOD_ID, POST_ID, USER_ID, GOOD_COUNT";
+			String sql = "SELECT COMMENT_ID, POST_ID, USER_ID, COMMENT";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//SELECTを実行し、結果表を取得
@@ -38,5 +38,54 @@ public class CommentDAO implements DAO {
 			return null;
 		}
 		return goodList;
+	}
+	
+	public Boolean createComment(Comment comment) {
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {			
+			// INSERT文を準備
+			String sql = "INSERT INTO POST(POST_ID, USER_ID, COMMENT) VALUES(?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// INSERT文中の「？」に使用する値を設定しSQLを完成
+			pStmt.setInt(1, comment.getPostID());
+			pStmt.setInt(2, comment.getUserID());
+			pStmt.setString(3, comment.getComment());
+			
+			//INSERTを実行
+			int result = pStmt.executeUpdate();
+			if(result != 1) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public Boolean updateComment() {
+		// TODO
+		return true;
+	}
+	
+	public Boolean deleteComment(int comment_id) {
+		// DBへ接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			
+			// DELETE文を準備
+			String sql = "DELETE FROM COMMENT WHERE COMMENT_ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, comment_id);
+			
+			//DELETEを実行し、結果表を取得
+			int result = pStmt.executeUpdate();
+			if(result != 1) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }

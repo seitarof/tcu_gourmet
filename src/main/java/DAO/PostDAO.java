@@ -41,4 +41,54 @@ public class PostDAO implements DAO {
 		}
 		return postList;
 	}
+	
+	public Boolean createPost(Post post) {
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {			
+			// INSERT文を準備
+			String sql = "INSERT INTO POST(USER_ID, SHOP_NAME, REVIEW, PHOTO) VALUES(?, ?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// INSERT文中の「？」に使用する値を設定しSQLを完成
+			pStmt.setInt(1, post.getUserID());
+			pStmt.setString(2, post.getShopName());
+			pStmt.setString(3, post.getReview());
+			pStmt.setString(4, post.getPhotoPath());
+			
+			//INSERTを実行
+			int result = pStmt.executeUpdate();
+			if(result != 1) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public Boolean updatePost(int userID, String shopName, String review, String photoPath) {
+		// TODO 更新メソッドを書く
+		return false;
+	}
+	
+	public Boolean deletePost(int post_id) {
+		// DBへ接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			
+			// DELETE文を準備
+			String sql = "DELETE FROM POST WHERE POST_ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, post_id);
+			
+			//DELETEを実行し、結果表を取得
+			int result = pStmt.executeUpdate();
+			if(result != 1) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

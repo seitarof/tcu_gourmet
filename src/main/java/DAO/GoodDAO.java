@@ -39,4 +39,53 @@ public class GoodDAO implements DAO {
 		}
 		return goodList;
 	}
+	
+	public Boolean createGood(Good good) {
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {			
+			// INSERT文を準備
+			String sql = "INSERT INTO POST(POST_ID, USER_ID, GOOD_COUNT) VALUES(?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// INSERT文中の「？」に使用する値を設定しSQLを完成
+			pStmt.setInt(1, good.getPostID());
+			pStmt.setInt(2, good.getUserID());
+			pStmt.setInt(3, good.getGoodCount());
+			
+			//INSERTを実行
+			int result = pStmt.executeUpdate();
+			if(result != 1) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public Boolean updateGood() {
+		// TODO
+		return true;
+	}
+	
+	public Boolean deleteGood(int good_id) {
+		// DBへ接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			
+			// DELETE文を準備
+			String sql = "DELETE FROM GOOD WHERE GOOD_ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, good_id);
+			
+			//DELETEを実行し、結果表を取得
+			int result = pStmt.executeUpdate();
+			if(result != 1) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }
