@@ -42,6 +42,35 @@ public class PostDAO implements DAO {
 		return postList;
 	}
 	
+	public Post readPost(int postID) {
+		Post post = null;
+		// DBへ接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			
+			// SELECT文を準備
+			String sql = "SELECT POST_ID, USER_ID, SHOP_NAME, REVIEW, PHOTO FROM USER WHERE POST_ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, postID);
+			
+			//SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+			
+			// 結果表に格納されたレコードの内容をUserインスタンスに設定し、ArrayListインスタンスに追加
+			while (rs.next()) {
+				int userID = rs.getInt("USER_ID");
+				String name = rs.getString("NAME");
+				String pass = rs.getString("PASS");
+				String email = rs.getString("EMAIL");
+				Boolean admin = rs.getBoolean("ADIMN");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return post;
+	}
+	
+	
 	public Boolean createPost(Post post) {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {			
 			// INSERT文を準備
@@ -91,4 +120,5 @@ public class PostDAO implements DAO {
 		}
 		return true;
 	}
+
 }

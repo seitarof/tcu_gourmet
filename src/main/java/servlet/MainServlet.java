@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +21,17 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		/*----------------------------------------------------------*/
+		/*				
+		 * マイページを表示する											*/
+		//フォワード-->マイページ
+		//getRequestDispatcherメソッドの指定パスが正しいか要確認
+		/*															*/
+		/*----------------------------------------------------------*/
+		RequestDispatcher dispatcher = request.getRequestDispatcher("webapp/Web-INF/mainpage.html");
+		dispatcher.forward(request,response);
+
 	}
 
 	/**
@@ -27,7 +39,15 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		/*----------------------------------------------------------*/
+		/*															*/
+		//投稿の処理を呼び出す
+		//フォワード-->投稿処理ページ
+		//getRequestDispatcherメソッドの指定パスが正しいか要確認
+		/*															*/
+		/*----------------------------------------------------------*/
+		RequestDispatcher dispatcher = request.getRequestDispatcher("webapp/login.jsp");
+		dispatcher.forward(request,response);
 	}
 
 }

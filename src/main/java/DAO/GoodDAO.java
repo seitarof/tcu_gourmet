@@ -40,6 +40,7 @@ public class GoodDAO implements DAO {
 		return goodList;
 	}
 	
+	
 	public Boolean createGood(Good good) {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {			
 			// INSERT文を準備
@@ -88,4 +89,5 @@ public class GoodDAO implements DAO {
 		}
 		return true;
 	}
+
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="logo"><img src="./img/header_logo.png" alt=""></div>
+    <div class="login-page">        
+        <div class="form">
+            <form class="register-form" action="#" method="post">
+                <input type="text" placeholder="name" name="name"/>                
+                <input type="email" placeholder="Email Address" name=""/>
+                <input type="password" placeholder="password" name="pass"/>
+                <button >create</button>
+                <p class="message">もうアカウント持ってる? <a href="#">ログイン</a></p>
+            </form>
+            <form class="login-form" action="Login" method="post">
+                <input type="email" placeholder="Email Address" id="email" name="email"/>
+                <input type="password" placeholder="password" id="pass" name="pass"/>
+                <button>login</button>
+                <p class="message">アカウント持ってる? <a href="#">新規登録</a></p>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

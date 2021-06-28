@@ -18,7 +18,7 @@ public class CommentDAO implements DAO {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
-			String sql = "SELECT COMMENT_ID, POST_ID, USER_ID, COMMENT";
+			String sql = "SELECT GOOD_ID, POST_ID, USER_ID, GOOD_COUNT";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//SELECTを実行し、結果表を取得
