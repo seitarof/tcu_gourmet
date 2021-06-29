@@ -29,7 +29,7 @@ public class WillGoDAO implements DAO {
 				int willGoID = rs.getInt("WILLGO_ID");
 				int postID = rs.getInt("POST_ID");
 				int userID = rs.getInt("USER_ID");
-				int willGoDate = rs.getInt("WILLGO_DATE");
+				String willGoDate = rs.getString("WILLGO_DATE");
 				WillGo willGo = new WillGo(willGoID, postID, userID, willGoDate);
 				willGoList.add(willGo);
 			}
@@ -87,5 +87,31 @@ public class WillGoDAO implements DAO {
 			return false;
 		}
 		return true;
+	}
+	
+	public WillGo readLastWillGo() {
+		WillGo willGo = null;
+		// DBへ接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			
+			// SELECT文を準備
+			String sql = "SELECT * FROM WILLGO ORDER BY WILLGO_ID DESC LIMIT 1;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			//SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+			
+			// 結果表に格納されたレコードの内容をPostインスタンスに設定し、ArrayListインスタンスに追加
+			rs.next();
+			int willGoID = rs.getInt("WILLGO_ID");
+			int postID = rs.getInt("POST_ID");
+			int userID = rs.getInt("USER_ID");
+			String willGoDate = rs.getString("WILLGO_DATE");
+			willGo = new WillGo(willGoID, postID, userID, willGoDate);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return willGo;
 	}
 }
