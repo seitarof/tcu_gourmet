@@ -1,13 +1,18 @@
 package servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.*;
-import DAO.*;
+import javax.servlet.http.HttpSession;
+
+import DAO.PostDAO;
+import model.Post;
+import model.User;
 
 /**
  * Servlet implementation class PostServlet
@@ -15,14 +20,6 @@ import DAO.*;
 @WebServlet("/PostServlet")
 public class PostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public PostServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -42,18 +39,24 @@ public class PostServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 値を取得
 		request.setCharacterEncoding("UTF-8");
-		String userIDString = request.getParameter("userID");
+
 		String shopName = request.getParameter("shopName");
 		String photo = request.getParameter("picture");
-		String review = request.getParameter("postText");
-		int userID = Integer.parseInt(userIDString);
-		Post post = new Post();
-		post.setUserID(userID);
-		post.setShopName(shopName);
-		post.setPhotoPath(photo);
-		post.setReview(review);
+		String review = request.getParameter("review");
+		
+		// セッションスコープに保存されたユーザ情報を取得
+		HttpSession session = request.getSession();
+		User loginUser = (User)session.getAttribute("loginUser");
+		
+		int userID = loginUser.getUserID();
+		Post post = new Post(userID, shopName, review, photo);
 		PostDAO pDAO = new PostDAO();
 		pDAO.createPost(post);
+		
+		// この時点ではPOST_IDがインスタンスに含まれていないため、インスタンスに含まれるようにする
+		post = pDAO.readLastPost();
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mainpage.jsp");
+		dispatcher.forward(request, response);
 	}
-
 }

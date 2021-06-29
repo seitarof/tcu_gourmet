@@ -1,0 +1,166 @@
+@charset "UTF-8";
+.header {
+  height: 120px;
+  width: 100%;
+  padding: 20px 5%;
+  background-color: #ffbb00;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header__logo {
+  width: 350px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-right: 50px;
+}
+
+.header__nav {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 100%;
+}
+
+.nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.nav__item {
+  height: 100%;
+  margin-left: 30px;
+}
+
+.nav__button {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: #000;
+  font-size: 2.5rem;
+  border: #000 1px solid;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.postDetail {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 40px 80px;
+  border: #000 1px solid;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.postDetail p {
+  font-size: 3rem;
+  margin-left: 200px;
+  position: relative;
+}
+
+.postDetail p::before {
+  font-size: 3rem;
+  position: absolute;
+  top: 0;
+  left: -150px;
+}
+
+.postDetail__poster::before {
+  content: "投稿者 :";
+}
+
+.postDetail__shopName::before {
+  content: "店名 :";
+}
+
+.postDetail__shopAddress::before {
+  content: "場所 :";
+}
+
+.postDetail__txt::before {
+  content: "本文 :";
+}
+
+.postDetail__pictures {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  gap: 20px;
+}
+
+.postDetail__img {
+  width: 23%;
+}
+
+.postDetail__reaction {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+
+.back {
+  width: 1200px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.back__button {
+  font-size: 2.5rem;
+  text-decoration: none;
+  color: #000;
+  display: inline-block;
+  padding: 10px 20px;
+  border: #000 1px solid;
+  border-radius: 10px;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+/*# sourceMappingURL=detailpage.css.map */

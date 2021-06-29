@@ -7,33 +7,25 @@
     <meta name="description" content="テキスト入力欄">
 </head>
 <body>
- <form action="example.php" method="post" name="contact-form">
-      店名: <input type="text"><br>
-      住所: <input type="text"><br>
-      写真: 
-	<form>
-		<input type="file" name="sample" accept="image/jpeg, image/png, image/gif" multiple>
-	</form>
-	
-	<!-- <label for="honbunlabel">本文</label>
-	 <textarea id="honbun"></textarea> -->
-	<div class="item">
-	  <label class="label" for="message">本文</label>
-	  <textarea rows="4" id="message" placeholder="投稿内容" name="comment"></textarea>
-	</div>
-	<button type="button">戻る</button>
-	<button type="button">投稿</button>         
-	<form>
-	    <input type="url" name="sample">
-	    <input type="url" name="sample">
-	    <button type="submit">送信</button>
+	<form action="PostServlet" method="post">
+		店名: <input type="text" name="shopName"><br>
+		<!-- 住所: <input type="text" name="address"><br>-->
+		<!--  写真: <input type="file" name="sample" accept="image/jpeg, image/png, image/gif" multiple> -->
+		
+		<!-- <label for="honbunlabel">本文</label>
+		<textarea id="honbun"></textarea> -->
+		<div class="item">
+		  <label class="label" for="message">本文</label>
+		  <textarea rows="4" id="message" placeholder="投稿内容" name="review"></textarea>
+		</div>
+		<button type="submit">投稿</button>
 	</form>
 	<style>
-	    textarea{
-	      width:100%;
-	      height:100px;
-	      resize:vertical;
-	    }
+	   textarea{
+	     width:100%;
+	     height:100px;
+	     resize:vertical;
+	   }
 	</style>
 </body>
 </html>

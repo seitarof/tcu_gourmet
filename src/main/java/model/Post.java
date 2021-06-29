@@ -11,16 +11,23 @@ public class Post implements Serializable {
     private int goodCount;
     private int commentCount;
 
+    public Post(){
+        
+    }
+    
     public Post(int postID, int userID, String shopName, String review, String photoPath) {
         this.postID = postID;
         this.userID = userID;
         this.shopName = shopName;
         this.review = review;
         this.photoPath = photoPath;
-
     }
-    public Post(){
-        
+    
+    public Post(int userID, String shopName, String review, String photoPath) {
+        this.userID = userID;
+        this.shopName = shopName;
+        this.review = review;
+        this.photoPath = photoPath;
     }
 
 

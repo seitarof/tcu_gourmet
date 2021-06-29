@@ -94,6 +94,34 @@ public class UserDAO implements DAO {
 		return user;
 	}
 	
+	public User readUser(int userID) {
+		User user = null;
+		// DBへ接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			
+			// SELECT文を準備
+			String sql = "SELECT USER_ID, NAME, PASS, EMAIL, ADMIN FROM USER WHERE USER_ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, userID);
+			
+			//SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+			
+			// 結果表に格納されたレコードの内容をUserインスタンスに設定し、ArrayListインスタンスに追加
+			while (rs.next()) {
+				String name = rs.getString("NAME");
+				String pass = rs.getString("PASS");
+				String email = rs.getString("EMAIL");
+				Boolean admin = rs.getBoolean("ADMIN");
+				user = new User(name, userID, email, pass, admin);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return user;
+	}
+	
 	public Boolean updateUser(String name, String pass, String email, String admin) {
 		// TODO 更新メソッドを書く
 		return false;

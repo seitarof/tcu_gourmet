@@ -35,7 +35,6 @@ public class PostDAO implements DAO {
 				postList.add(post);
 			}
 		} catch (SQLException e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return null;
 		}

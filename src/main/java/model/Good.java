@@ -14,6 +14,12 @@ public class Good implements Serializable {
         this.userID = userID;
         this.goodCount = goodCount;
     }
+    
+    public Good(int postID, int userID) {
+        this.postID = postID;
+        this.userID = userID;
+        this.goodCount = 0;
+    }
 
     public Good() {
 
