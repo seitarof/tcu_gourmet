@@ -95,7 +95,7 @@ public class GoodDAO implements DAO {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
-			String sql = "SELECT SUM(GOOD_COUNT) FROM GOOD WHERE POST_ID = ?";
+			String sql = "SELECT COUNT(*) FROM GOOD WHERE POST_ID = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, postID);
 			
@@ -104,7 +104,7 @@ public class GoodDAO implements DAO {
 			
 			// 結果表に格納されたレコードの内容をUserインスタンスに設定し、ArrayListインスタンスに追加
 			rs.next();
-			count = rs.getInt("SUM(GOOD_COUNT)");
+			count = rs.getInt("COUNT(*)");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;

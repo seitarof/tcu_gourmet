@@ -1,9 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.Scanner;
-import java.math.BigInteger;
 
 public class User implements Serializable {
     private String name;
@@ -21,7 +21,6 @@ public class User implements Serializable {
         this.email = email;
         this.hashedPass = hashedPass;
         this.admin = admin;
-
     }
 
     public void setName(String name) {
