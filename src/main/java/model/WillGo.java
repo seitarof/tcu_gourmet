@@ -6,10 +6,9 @@ public class WillGo implements Serializable {
     private int willGoID;
     private int postID;
     private int userID;
-    private int willGoDate;
+    private String willGoDate;
 
-    public WillGo(int willGoID, int postID, int userID, int willGoDate) {
-        this.willGoID = willGoID;
+    public WillGo(int postID, int userID, String willGoDate) {
         this.postID = postID;
         this.userID = userID;
         this.willGoDate = willGoDate;
@@ -43,11 +42,11 @@ public class WillGo implements Serializable {
         return this.userID;
     }
 
-    public void setWillGoDate(int willGoDate) {
+    public void setWillGoDate(String willGoDate) {
         this.willGoDate = willGoDate;
     }
 
-    public int getWillGoDate() {
+    public String getWillGoDate() {
         return this.willGoDate;
     }
 
